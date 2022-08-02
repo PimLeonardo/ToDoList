@@ -1,0 +1,19 @@
+.task-container {
+    background-color: rgba(91, 123, 255, 0.2);
+    margin: 15px 0;
+    padding: 15px 20px;
+    display: flex;
+    border-radius: 5px;
+    justify-content: space-between;
+    color: rgb(117, 176, 255);
+    align-items: center;
+}
+
+.task-container:hover {
+    cursor: pointer;
+    color: rgb(50, 61, 136);
+    background-color: rgb(117, 176, 255);
+    box-shadow: 0 0 1em .25em rgb(117, 176, 255),
+           0 0 4em 2em rgba(91, 123, 255, 0.781),
+           inset 0 0 .75em .25em rgb(117, 176, 255);
+}

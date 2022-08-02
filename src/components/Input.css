@@ -1,0 +1,15 @@
+.input {
+    color: rgb(117, 176, 255);
+    border: 2px solid rgb(117, 176, 255);
+    border-radius: 10px;
+    padding: 10px 25px;
+    font-size: 12px;
+    background: transparent;
+    max-width: 350px;
+    flex: 2;
+   }
+   
+   .input:active {
+    box-shadow: 2px 2px 15px rgba(91, 123, 255, 0.781) inset;
+   }
+   
