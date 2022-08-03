@@ -14,6 +14,7 @@ const AddTask = (props) => {
 
     const handleAddClick = () => {
         props.handleTaskAdd(inputData)
+        setInputData("");
     }
 
     return (
