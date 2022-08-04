@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 
@@ -30,7 +31,7 @@ function App() {
   };
 
   const handleTaskAdd = (taskTitle) => {
-    const newTask = [
+    const newTasks = [
       ...tasks,
       {
         title: taskTitle,
@@ -38,14 +39,25 @@ function App() {
         completed: false,
       },
     ];
-    setTasks(newTask);
+    setTasks(newTasks);
+  };
+
+  const handleTaskDelete = (idTask) => {
+    const newTasks = tasks.filter((task) => task.id !== idTask);
+
+    setTasks(newTasks);
   };
 
   return (
     <>
       <div className="Container">
+        <Header />
         <AddTask handleTaskAdd={handleTaskAdd} />
-        <Tasks tasks={tasks} handleTaskStatus={handleTaskStatus} />
+        <Tasks
+          tasks={tasks}
+          handleTaskStatus={handleTaskStatus}
+          handleTaskDelete={handleTaskDelete}
+        />
       </div>
     </>
   );

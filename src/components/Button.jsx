@@ -5,7 +5,7 @@ import "./Button.css"
 const Button = (props) => {
     return (
         <>
-            <button onClick={props.handleAddClick}>{props.title}</button>
+            <button className="button" onClick={props.handleAddClick}>{props.title}</button>
         </>
     );
 }

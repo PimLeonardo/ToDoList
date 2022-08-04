@@ -20,7 +20,7 @@ button {
     transition: all 0.3s;
    }
    
-   button:hover {
+button:hover {
     color: var(--btn-color);
     background-color: var(--glow-color);
     box-shadow: 0 0 1em .25em var(--glow-color),
@@ -28,7 +28,7 @@ button {
            inset 0 0 .75em .25em var(--glow-color);
    }
    
-   button:active {
+button:active {
     box-shadow: 0 0 0.6em .25em var(--glow-color),
            0 0 2.5em 2em var(--glow-spread-color),
            inset 0 0 .5em .25em var(--glow-color);
