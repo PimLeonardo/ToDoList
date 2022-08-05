@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Input from "./Input"
 import Button from "./Button"
-
 import "./AddTask.css"
 
 const AddTask = (props) => {
@@ -20,7 +19,7 @@ const AddTask = (props) => {
     return (
         <div className="add-task-container">
             <Input handleInputChange={handleInputChange} inputData={inputData} />
-            <Button handleAddClick={handleAddClick} title="Adicionar" />
+            <Button propsClick={handleAddClick} title="Adicionar" />
         </div>
     );
 }
