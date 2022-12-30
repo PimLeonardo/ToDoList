@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
@@ -8,80 +7,94 @@ import TaskDetails from "./components/TaskDetails";
 import "./App.css";
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: "1",
-      title: "Exemplo 1",
-      completed: false,
-    },
-    {
-      id: "2",
-      title: "Exemplo 2",
-      completed: true,
-    },
-    {
-      id: "3",
-      title: "Exemplo 3",
-      completed: false,
-    },
-  ]);
+    const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
+    useEffect(() => {
+        checkId()
+        loadTasks()
+    }, [])
 
-  }, [])
+    const loadTasks = () => {
 
-  const handleTaskStatus = (idTask) => {
-    const newTasks = tasks.map((task) => {
-      if (task.id === idTask) return { ...task, completed: !task.completed };
+        const taskList = ([])
+        const id = localStorage.getItem('id')
 
-      return task;
-    });
+        for (let i = 1; i <= id; i++) {
+            let task = JSON.parse(localStorage.getItem(i))
 
-    setTasks(newTasks);
-  };
+            if (task === null) {
+                continue
+            }
 
-  const handleTaskAdd = (taskTitle) => {
-    const newTasks = [
-      ...tasks,
-      {
-        title: taskTitle,
-        id: uuidv4(),
-        completed: false,
-      },
-    ];
-    setTasks(newTasks);
-  };
+            taskList.id = i
+            taskList.push(task)
+        }
 
-  const handleTaskDelete = (idTask) => {
-    const newTasks = tasks.filter((task) => task.id !== idTask);
+        setTasks(taskList)
+    }
 
-    setTasks(newTasks);
-  };
+    const checkId = () => {
+        const id = localStorage.getItem("id")
+        if (id === null) {
+            localStorage.setItem("id", 0)
+        }
+    }
 
-  return (
-    <Router>
-      <div className="Container">
-        <Header />
-        <Route
-          path="/"
-          exact
-          render={() => {
-            return (
-              <>
-                <AddTask handleTaskAdd={handleTaskAdd} />
-                <Tasks
-                  tasks={tasks}
-                  handleTaskStatus={handleTaskStatus}
-                  handleTaskDelete={handleTaskDelete}
+    const createId = () => {
+        let nextId = localStorage.getItem("id")
+        return parseInt(nextId) + 1
+    }
+
+    const handleTaskAdd = (taskTitle, taskDetails) => {
+        const newTasks = [
+            {
+                id: createId(),
+                title: taskTitle,
+                details: taskDetails,
+            },
+        ];
+
+        localStorage.setItem(createId(), JSON.stringify(newTasks))
+
+        localStorage.setItem('id', createId())
+
+        loadTasks()
+    };
+
+    const handleTaskDelete = (titleTask) => {
+        tasks.forEach(function (task) {
+            // eslint-disable-next-line eqeqeq
+            if (task.find(task => task.title == titleTask)) {
+                const id = task.map(task => task.id)
+                localStorage.removeItem(id)
+                loadTasks()
+            }
+        })
+    };
+
+    return (
+        <Router>
+            <div className="Container">
+                <Header />
+                <Route
+                    path="/"
+                    exact
+                    render={() => {
+                        return (
+                            <>
+                                <AddTask handleTaskAdd={handleTaskAdd} />
+                                <Tasks
+                                    tasks={tasks}
+                                    handleTaskDelete={handleTaskDelete}
+                                />
+                            </>
+                        );
+                    }}
                 />
-              </>
-            );
-          }}
-        />
-        <Route path="/:taskTitle" exact component={TaskDetails} />
-      </div>
-    </Router>
-  );
+                <Route path="/:taskTitle" exact component={TaskDetails} />
+            </div>
+        </Router>
+    );
 }
 
 export default App;

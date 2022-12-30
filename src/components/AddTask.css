@@ -1,5 +1,12 @@
 .add-task-container {
-    margin: 15px 0;
-    width: 100%;
-    display: flex;
+  margin: 15px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+p {
+  color: rgb(117, 176, 255);
+  margin-left: 0.5em;
 }

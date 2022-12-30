@@ -4,7 +4,7 @@ import "./Input.css"
 const Input = (props) => {
     return (
         <>
-            <input type="text" className="input" placeholder="Escreva sua tarefa" onChange={props.handleInputChange} value={props.inputData} />
+            <input type="text" className="input" placeholder={props.placeholder} onChange={props.handleInputChange} value={props.inputData} />
         </>
     );
 }
